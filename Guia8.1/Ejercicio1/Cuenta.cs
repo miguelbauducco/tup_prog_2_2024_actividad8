@@ -48,7 +48,12 @@ namespace Ejercicio1
 
         public int CompareTo(object obj)
         {
-            ;
+            Cuenta c = obj as Cuenta;
+            if (c != null)
+            {
+                return Numero.CompareTo(c.Numero);
+            }
+            return -1; 
         }
     }
 }

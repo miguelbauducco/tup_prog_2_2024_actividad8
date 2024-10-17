@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnIniciar = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.Location = new System.Drawing.Point(132, 96);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(98, 47);
+            this.btnIniciar.TabIndex = 0;
+            this.btnIniciar.Text = "INICIAR";
+            this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(373, 245);
+            this.Controls.Add(this.btnIniciar);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnIniciar;
     }
 }
 
