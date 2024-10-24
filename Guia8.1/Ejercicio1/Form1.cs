@@ -14,25 +14,25 @@ namespace Ejercicio1
 {
     public partial class Form1 : Form
     {
-        Banco bna =new Banco();
+        Banco bna = new Banco();
 
         public Form1()
         {
             InitializeComponent();
         }
 
-     
+
 
         private void button1_Click(object sender, EventArgs e)
         {
 
 
-            textBox1.Text = $"{"Número Cuenta",10}|{"Nombre",20}|{"Saldo",20}"+Environment.NewLine;
+            textBox1.Text = $"{"Número Cuenta",10}|{"Nombre",20}|{"Saldo",20}" + Environment.NewLine;
 
-            textBox1.Text += "".PadRight(59,'-') + Environment.NewLine;
+            textBox1.Text += "".PadRight(59, '-') + Environment.NewLine;
 
             textBox1.Text += $"{234324324,10}|{"Pedro",20}|{234.2,20}" + Environment.NewLine;
-            
+
 
 
         }
@@ -40,8 +40,8 @@ namespace Ejercicio1
         private void button2_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            { 
-                string nombre=openFileDialog1.FileName;
+            {
+                string nombre = openFileDialog1.FileName;
 
 
                 FileStream fs = null;
@@ -52,32 +52,32 @@ namespace Ejercicio1
                     fs = new FileStream(nombre, FileMode.OpenOrCreate, FileAccess.Read);
                     sr = new StreamReader(fs);
 
-                    while(sr.EndOfStream== false) 
+                    while (sr.EndOfStream == false)
                     {
                         string linea = sr.ReadLine();
                         textBox1.Text += linea;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                 
+
                 }
-                finally 
+                finally
                 {
                     if (sr != null) sr.Close();
-                    if(fs != null) fs.Close();
+                    if (fs != null) fs.Close();
 
-                } 
-                
+                }
+
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
 
-            if(openFileDialog1.ShowDialog() == DialogResult.OK) 
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string path = openFileDialog1.FileName;
+                string path = saveFileDialog1.FileName;
 
                 FileStream fs = null;
                 StreamWriter sw = null;
@@ -87,19 +87,23 @@ namespace Ejercicio1
                     fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
                     sw = new StreamWriter(fs);
 
-                    foreach (char linea in textBox1.Text )
+                    for (int idx = 0; idx < bna.CantidadCuentas; idx++)
                     {
+                        Cuenta cuenta = bna[idx];
+
+                        string linea = $"{cuenta.Numero};{cuenta.Titular.Nombre};{cuenta.Titular.Dni};{cuenta.Saldo:f2}";
+
                         sw.WriteLine(linea);
                     }
                 }
                 catch (Exception ex)
                 {
-                    
+                    MessageBox.Show(ex.Message + "|" + ex.StackTrace.ToString());
                 }
-                finally 
+                finally
                 {
-                if (sw!=null) sw.Close();
-                if (fs != null) fs.Close();
+                    if (sw != null) sw.Close();
+                    if (fs != null) fs.Close();
                 }
 
 
