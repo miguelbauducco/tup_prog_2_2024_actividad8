@@ -9,14 +9,13 @@ namespace Ejercicio1
 {
     public class Banco
     {
-        private List<Persona> clientes;
-        public List<Cuenta> cuentas;
+        private List<Persona> clientes= new List<Persona>();
+        public List<Cuenta> cuentas=new  List<Cuenta>();
 
         public int CantidadClientes
         {
 
             get { return clientes.Count; }
-            set { CantidadClientes = value; }
 
         }
 
@@ -24,7 +23,6 @@ namespace Ejercicio1
         {
 
             get { return cuentas.Count; }
-            set { CantidadClientes = value; }
         }
 
         public Cuenta this[int idx]
@@ -44,14 +42,15 @@ namespace Ejercicio1
 
             Persona p = VerClientePorDni(dni);
 
-            if (p == null) 
+
+            if (p == null) //sino es cliente lo agregas
             {
                 p = new Persona(dni, nombre);
                 clientes.Add(p);
             }
 
             Cuenta c = VerCuentaPorNumero(numeroCuenta);
-            if (c == null) 
+            if (c == null) //si la cuenta no existe se agrega y se vincula con el cliente existen
             {
                 c = new Cuenta(numeroCuenta, p);
                 cuentas.Add(c);
@@ -62,45 +61,41 @@ namespace Ejercicio1
 
         public Cuenta VerCuentaPorNumero(int numeroCuenta)
         {
-            foreach (Cuenta c in cuentas)
+            cuentas.Sort();
+
+            Cuenta busqueda = new Cuenta(numeroCuenta, null);
+
+            int idx = cuentas.BinarySearch(busqueda);
+
+            if (idx >= 0)
             {
-                if (c.Numero == numeroCuenta)
-                {
-                    return c;
-                }
+                return cuentas[idx];
             }
+
             return null;
         }
     
 
         public Persona VerClientePorDni (int dni) 
         {
-            foreach(Persona p in clientes)
+            cuentas.Sort();
+
+            Persona busqueda = new Persona(dni,"");
+
+            int idx = clientes.BinarySearch(busqueda);
+
+            if (idx >= 0)
             {
-                if(p.Dni== dni) 
-                {
-                    return p;
-                
-                }
+                return clientes[idx];
             }
+
             return null;
         }
 
         public bool RestaurarCuenta(int numeroCuenta, double saldo, DateTime fecha, Persona p) 
         {
-            
+            return false;
 
         }
-
-    
-
-
-        
-        
-        
-
-
-
-
     }
 }
