@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1
 {
+    [Serializable]
     public class Cuenta:IComparable<Cuenta>
     {
 
         public int Numero { get; set; }
       
         
-        public double Saldo {get;set;        }
+        public double Saldo {get;set;   }
 
         public DateTime Fecha{ get;set; }
 
@@ -35,7 +36,8 @@ namespace Ejercicio1
 
         public int CompareTo(Cuenta other)
         {
-            if(other!=null) this.Numero.CompareTo(other.Numero);
+            if(other!=null) 
+                return this.Numero.CompareTo(other.Numero);
             return 1;
         }
     }

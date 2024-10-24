@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1
 {
+    [Serializable]
     public class Banco
     {
         private List<Persona> clientes= new List<Persona>();

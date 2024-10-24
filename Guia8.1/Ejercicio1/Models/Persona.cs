@@ -6,24 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1
 {
-    public class Persona:IComparable
+    [Serializable]
+    public class Persona:IComparable<Persona>
     {
 
-        public int Dni 
-        {
-        
-            get { return Dni; }
-            set { Dni = value; }
-        
-        }
+        public int Dni { get; private set; }
+   
 
-        public string Nombre 
-        {
-        
-            set { Nombre = value; }
-            get { return Nombre; }  
-
-        }
+        public string Nombre { get; private set; }
 
         public Persona(int dni, string nombre)
         {
@@ -31,14 +21,13 @@ namespace Ejercicio1
             Nombre = nombre;
         }
 
-        public int CompareTo(object obj)
+        public int CompareTo(Persona other)
         {
-            Persona p = obj as Persona;
-            if (p != null) 
+            if (other != null)
             {
-               return Dni.CompareTo(p.Dni);
+                return Dni.CompareTo(other.Dni);
             }
-            return -1;
+            return 1;
         }
     }
 }
